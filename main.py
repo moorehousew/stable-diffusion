@@ -573,6 +573,7 @@ if __name__ == "__main__":
                 "filename": "{epoch:06}",
                 "verbose": True,
                 "save_last": True,
+                "save_weights_only": False,
             }
         }
         if hasattr(model, "monitor"):
@@ -642,7 +643,7 @@ if __name__ == "__main__":
                          "verbose": True,
                          'save_top_k': -1,
                          'every_n_train_steps': 10000,
-                         'save_weights_only': True
+                         'save_weights_only': False
                      }
                      }
             }
@@ -673,7 +674,7 @@ if __name__ == "__main__":
         # configure learning rate
         bs, base_lr = config.data.params.batch_size, config.model.base_learning_rate
         if not cpu:
-            ngpu = len(lightning_config.trainer.gpus.strip(",").split(','))
+            ngpu = 1
         else:
             ngpu = 1
         if 'accumulate_grad_batches' in lightning_config.trainer:
